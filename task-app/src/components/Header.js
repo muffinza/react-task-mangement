@@ -1,4 +1,8 @@
 import "./Header.css"
+import { BsFillSunFill } from "react-icons/bs";
+import { BsFillMoonFill } from "react-icons/bs";
+import { BsToggleOff } from "react-icons/bs";
+import { BsToggleOn } from "react-icons/bs";
 export default function Header(props){
     const {theme,setTheme} = props
     const ToggleTheme=()=>{
@@ -16,11 +20,11 @@ export default function Header(props){
             <div className="theme-container">
                 <span>
                     <span>
-                    {theme === 'light' ? 'โหมดสว่าง':'โหมดมืด'}
+                    {theme === 'light' ? <BsFillSunFill />: <BsFillMoonFill />}
                     </span>
                 </span>
                 <span  className="icon" onClick={ToggleTheme}>
-                    สลับ
+                    {theme === 'light' ? <BsToggleOff />: <BsToggleOn />}
                 </span>
             </div>
         </header>
