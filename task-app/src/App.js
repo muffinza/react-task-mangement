@@ -2,28 +2,38 @@ import Header from "./components/Header";
 import Item from "./components/item";
 import AddForm from "./components/AddForm";
 import "./App.css";
-import { useState /*,useEffect*/ } from "react";
+import { useState , useEffect} from "react";
 
 function App() {
-  const [task, setTasks] = useState([
-    { id: 1, title: "เก็บห้อง" },
-    { id: 2, title: "ล้างกรงก้า" },
-    { id: 3, title: "ซักผ้า" },
-    { id: 4, title: "ล้างจาน" },
-  ]);
-
+  const [task, setTasks] = useState(JSON.parse(sessionStorage.getItem("task")) || []);
   const [title, setTitle] = useState("");
   const [isError, setError] = useState(false);
   const [editId, setEditId] = useState(null);
+  let firstLoad = true
+
 
   // useEffect(() => {
+  //  //โดนทุกๆตัว
+  //console.log("use use")
+  // });
 
-  //   if(!title){
-  //     setError(true)
-  //   }else{
-  //     setError(false)
-  //   }
-  // }, [title]);
+  //useEffect(() => {
+    //onMouted ทำงานตอนเปิดหน้าจอครั้งเเรก
+   // console.log("use use")
+   //},[]);
+
+
+  // useEffect(() => {
+  //   //ทำงานเเค่titelเปลี่ยน 
+  //  console.log("use use")
+  //  },[title]);
+ 
+
+  useEffect(() => {
+    sessionStorage.setItem("tasks",JSON.stringify(task))
+  }, [task]);
+
+
 
   const deleteTask = (id) => {
     const taskList = [...task];
@@ -61,8 +71,12 @@ function App() {
     if (val) {
       setError(false);
     } else {
-      setError(true);
-      setEditId(null);
+     
+      if(!firstLoad){
+        setError(true);
+        setEditId(null);
+      }
+      firstLoad = false
     }
     setTitle(val);
   };
