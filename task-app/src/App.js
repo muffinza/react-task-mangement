@@ -9,6 +9,7 @@ function App() {
   const [title, setTitle] = useState("");
   const [isError, setError] = useState(false);
   const [editId, setEditId] = useState(null);
+  const [theme,setTheme] = useState("light")
   let firstLoad = true
 
 
@@ -88,8 +89,8 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <Header />
+    <div className={"App "+theme}>
+      <Header theme={theme} setTheme={setTheme}/>
       <div className="container">
         <AddForm
           title={title}

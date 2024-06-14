@@ -1,5 +1,13 @@
 import "./Header.css"
-export default function Header(){
+export default function Header(props){
+    const {theme,setTheme} = props
+    const ToggleTheme=()=>{
+        if(theme ==='light'){
+            setTheme('dark')
+        }else{
+            setTheme('light')
+        }
+    }
     return(
         <header>
             <div className="logo">
@@ -7,9 +15,11 @@ export default function Header(){
             </div>
             <div className="theme-container">
                 <span>
-                    โหมดกลางคืน
+                    <span>
+                    {theme === 'light' ? 'โหมดสว่าง':'โหมดมืด'}
+                    </span>
                 </span>
-                <span className="icon">
+                <span  className="icon" onClick={ToggleTheme}>
                     สลับ
                 </span>
             </div>
